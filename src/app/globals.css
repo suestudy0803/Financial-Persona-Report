@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-primary: #0a0a0a;
+  --color-primary-active: #1f1f1f;
+  --color-primary-disabled: #e5e5e5;
+  --color-ink: #0a0a0a;
+  --color-muted: #6a6a6a;
+  --color-canvas: #fffaf0;
+  --color-hairline: #e5e5e5;
+  --color-on-primary: #ffffff;
+}
+
 :root {
   font-family: Arial, Helvetica, sans-serif;
   color: #0a0a0a;
