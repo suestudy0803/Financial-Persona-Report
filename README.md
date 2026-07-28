@@ -42,3 +42,29 @@
 * **Styling**: Tailwind CSS, Stitch UI
 * **Deployment**: Vercel
 *(본 프로젝트는 별도의 백엔드 및 데이터베이스 없이 Client-Side 중심으로 동작합니다.)*
+
+---
+
+## 🚀 실행 방법
+
+### 1. 의존성 설치
+
+```bash
+npm install
+```
+
+### 2. 개발 서버 실행
+
+```bash
+npm run dev
+```
+
+브라우저에서 [http://localhost:3000](http://localhost:3000)에 접속합니다.
+
+### 3. 정적 빌드
+
+```bash
+npm run build
+```
+
+빌드 결과는 `out/` 디렉터리에 생성됩니다.
