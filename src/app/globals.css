@@ -11,6 +11,8 @@
   --color-on-primary: #ffffff;
   --color-surface-strong: #ebe6d6;
   --color-brand-ochre: #e8b94a;
+  --color-surface-card: #f5f0e0;
+  --color-body: #3a3a3a;
 }
 
 :root {

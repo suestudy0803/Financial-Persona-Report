@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 // DESIGN.md components: button-primary / button-secondary / button-on-color / button-text-link
 const VARIANT_CLASSES = {
   primary:
@@ -16,17 +18,23 @@ export default function Button({
   variant = "primary",
   className = "",
   type = "button",
+  href,
   children,
   ...props
 }) {
   const variantClassName = VARIANT_CLASSES[variant] ?? VARIANT_CLASSES.primary;
+  const sharedClassName = `inline-flex items-center justify-center whitespace-nowrap text-sm leading-none font-semibold tracking-normal transition-colors disabled:cursor-not-allowed disabled:pointer-events-none ${variantClassName} ${className}`;
+
+  if (href) {
+    return (
+      <Link href={href} className={sharedClassName} {...props}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
-    <button
-      type={type}
-      className={`inline-flex items-center justify-center whitespace-nowrap text-sm leading-none font-semibold tracking-normal transition-colors disabled:cursor-not-allowed disabled:pointer-events-none ${variantClassName} ${className}`}
-      {...props}
-    >
+    <button type={type} className={sharedClassName} {...props}>
       {children}
     </button>
   );
