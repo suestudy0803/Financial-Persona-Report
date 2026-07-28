@@ -9,6 +9,8 @@
   --color-canvas: #fffaf0;
   --color-hairline: #e5e5e5;
   --color-on-primary: #ffffff;
+  --color-surface-strong: #ebe6d6;
+  --color-brand-ochre: #e8b94a;
 }
 
 :root {
