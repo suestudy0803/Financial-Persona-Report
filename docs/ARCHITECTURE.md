@@ -45,13 +45,12 @@ Financial-Persona-Report/
 │   ├── tests/
 │   └── pyproject.toml
 │
-├── docs/                            # SPEC, TASK, API·운영 문서
-├── ARCHITECTURE.md                  # 전체 시스템 구조
-├── package.json                     # 필요할 때 사용하는 루트 스크립트
-└── README.md
+├── docs/                            # ARCHITECTURE, SPEC, TASK, API·운영 문서
+├── README.md                        # 프로젝트 시작 안내
+└── .gitignore
 ```
 
-현재 저장소의 기존 Next.js 파일은 모노레포 전환 시 `frontend/`로 이동한다. 기존 문서 중 프론트엔드 전용인 `DESIGN.md`는 `frontend/DESIGN.md`에 둔다. 실제 이동은 별도의 작업으로 처리한다.
+프론트엔드 전용 디자인 문서는 `frontend/DESIGN.md`에 두고, 전체 구조와 기능 명세는 `docs/ARCHITECTURE.md`와 `docs/SPEC.md`에서 관리한다.
 
 ## 3. 서비스 경계
 
@@ -107,7 +106,7 @@ FastAPI 라우터는 요청을 받고 서비스로 전달하는 역할만 한다
 ## 6. 데이터베이스 원칙
 
 - 모든 스키마 변경은 `supabase/migrations/`에 SQL migration으로 기록한다.
-- 질문, 선택지, 결과 유형, 테스트 제출 기록의 테이블 구조는 SPEC.md와 함께 확정한다.
+- 질문, 선택지, 결과 유형, 테스트 제출 기록의 테이블 구조는 `docs/SPEC.md`와 함께 확정한다.
 - 외부에 노출되는 `public` 스키마의 테이블에는 RLS를 활성화한다.
 - RLS 정책은 실제 접근 주체와 소유권에 맞게 작성한다. 단순히 `authenticated` 역할만 확인하는 정책은 사용하지 않는다.
 - `service_role` 키는 FastAPI 서버 환경에서만 사용하고 로그·응답·프론트엔드에 노출하지 않는다.
