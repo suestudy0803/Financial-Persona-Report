@@ -13,7 +13,7 @@ export default function HomePage() {
         <p className="max-w-xl text-lg leading-8 text-[#3a3a3a]">
           8개의 질문에 답하고 나에게 맞는 금융 MBTI 결과를 확인해보세요.
         </p>
-        <Button variant="primary" className="w-fit">
+        <Button href="/test" variant="primary" className="w-fit">
           테스트 시작하기
         </Button>
       </section>
