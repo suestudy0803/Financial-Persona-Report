@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+
+<html class="light" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Pretendard', sans-serif;
+            background-color: #fffaf0;
+            color: #0a0a0a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .clay-card {
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.05);
+        }
+
+        .bar-transition {
+            transition: width 1s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed": "#001a43",
+                        "warning-amber": "#F5A623",
+                        "on-primary-container": "#ffffff",
+                        "error-red": "#FF0055",
+                        "surface-container-high": "#272a32",
+                        "surface-tint": "#aec6ff",
+                        "on-secondary-container": "#b5b5b5",
+                        "on-tertiary": "#581e00",
+                        "inverse-on-surface": "#2d3039",
+                        "on-background": "#0a0a0a",
+                        "tertiary": "#ffb596",
+                        "on-surface": "#0a0a0a",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "inverse-surface": "#e0e2ed",
+                        "on-tertiary-container": "#fffeff",
+                        "on-secondary": "#303030",
+                        "surface-container-low": "#faf5e8",
+                        "surface-container-lowest": "#FFFFFF",
+                        "primary-fixed": "#d8e2ff",
+                        "surface-container-highest": "#32353d",
+                        "secondary": "#c6c6c6",
+                        "primary-fixed-dim": "#aec6ff",
+                        "success-green": "#00FFC2",
+                        "on-primary-fixed-variant": "#004397",
+                        "primary": "#aec6ff",
+                        "surface": "#fffaf0",
+                        "background": "#fffaf0",
+                        "on-secondary-fixed": "#1b1b1b",
+                        "secondary-container": "#474747",
+                        "on-error": "#690005",
+                        "primary-container": "#0a0a0a",
+                        "outline": "#8b90a0",
+                        "surface-variant": "#32353d",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-error-container": "#ffdad6",
+                        "outline-variant": "#414754",
+                        "error": "#ffb4ab",
+                        "surface-bright": "#363942",
+                        "secondary-fixed-dim": "#c6c6c6",
+                        "surface-elevated": "#FFFFFF",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-fixed-variant": "#474747",
+                        "surface-container": "#faf5e8",
+                        "on-primary": "#002e6b",
+                        "surface-dim": "#10131b",
+                        "inverse-primary": "#0059c5",
+                        "on-surface-variant": "#6a6a6a",
+                        "border-subtle": "#e5e5e5",
+                        "tertiary-container": "#ca4e00",
+                        "clay-pink": "#ff4d8b",
+                        "clay-teal": "#a4d4c5",
+                        "clay-ochre": "#e8b94a",
+                        "clay-peach": "#ffb084",
+                        "clay-lavender": "#b8a4ed"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "1rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "container-max": "600px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Pretendard"],
+                        "body-md": ["Pretendard"],
+                        "headline-lg": ["Pretendard"],
+                        "headline-xl": ["Pretendard"],
+                        "headline-md": ["Pretendard"],
+                        "body-sm": ["Pretendard"],
+                        "mono-label": ["JetBrains Mono"],
+                        "code-block": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                        "headline-xl": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.04em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "mono-label": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                        "code-block": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-surface selection:bg-primary-container selection:text-white">
+<main class="max-w-[600px] mx-auto min-h-screen flex flex-col px-margin-mobile pt-10 pb-12 gap-8">
+    <!-- Header: Result Title -->
+<div class="text-center space-y-2">
+<p class="font-mono-label text-mono-label text-primary-container tracking-widest">FINANCIAL MBTI RESULT</p>
+<h1 class="font-headline-xl text-headline-xl text-[#10131B]">ANDT</h1>
+<h2 class="font-headline-md text-headline-md text-[#10131B]">부지런한 다람쥐</h2>
+</div>
+<!-- Top Illustration Section -->
+<div class="relative w-full aspect-square max-w-[400px] mx-auto mb-4">
+<div class="absolute inset-0 bg-clay-lavender rounded-[24px] clay-card overflow-hidden flex items-center justify-center p-8">
+<!-- Lavender Background Gradient -->
+<div class="absolute inset-0 opacity-30 bg-gradient-to-br from-white to-transparent"></div>
+</div>
+</div>
+<!-- Description Box -->
+<div class="bg-surface-container-low border border-border-subtle rounded-2xl p-6 mb-8 relative overflow-hidden">
+<div class="absolute top-0 right-0 p-4 opacity-10">
+<span class="material-symbols-outlined text-6xl">format_quote</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface leading-relaxed relative z-10">
+                데이터가 검증된 <span class="font-bold text-primary-container">지수/배당형 펀드 및 ETF</span>에<br/>
+                묵직하게 자금을 장기 투입하여 안정적인 수익을 추구합니다.
+            </p>
+</div>
+<!-- Trait Bars Section -->
+<div class="space-y-8 mb-12"><h3 class="font-mono-label text-mono-label text-on-surface-variant uppercase border-b border-border-subtle pb-2 mb-8">Analysis Breakdown</h3>
+<!-- A vs P: 활동 방식 -->
+<div class="space-y-3">
+<div class="text-center font-bold text-body-md mb-1">활동 방식</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col items-start w-12">
+<span class="font-headline-md text-on-surface-variant">32%</span>
+</div>
+<div class="flex-1 h-2 bg-border-subtle rounded-full overflow-hidden relative">
+<div class="absolute right-0 h-full bg-clay-pink bar-transition" style="width: 68%;"></div>
+</div>
+<div class="flex flex-col items-end w-12">
+<span class="font-headline-md text-clay-pink">68%</span>
+</div>
+</div>
+<div class="flex justify-between text-mono-label text-on-surface-variant opacity-60">
+<div class="flex flex-col">
+<span class="font-bold">A</span>
+<span class="text-[10px]">직접투자</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-bold">P</span>
+<span class="text-[10px]">간접투자</span>
+</div>
+</div>
+</div>
+<!-- N vs S: 정보 분석 -->
+<div class="space-y-3">
+<div class="text-center font-bold text-body-md mb-1">정보 분석</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col items-start w-12">
+<span class="font-headline-md text-clay-teal">78%</span>
+</div>
+<div class="flex-1 h-2 bg-border-subtle rounded-full overflow-hidden relative">
+<div class="absolute left-0 h-full bg-clay-teal bar-transition" style="width: 78%;"></div>
+</div>
+<div class="flex flex-col items-end w-12">
+<span class="font-headline-md text-on-surface-variant">22%</span>
+</div>
+</div>
+<div class="flex justify-between text-mono-label text-on-surface-variant opacity-60">
+<div class="flex flex-col">
+<span class="font-bold">N</span>
+<span class="text-[10px]">숫자 중심</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-bold">S</span>
+<span class="text-[10px]">감각 중심</span>
+</div>
+</div>
+</div>
+<!-- F vs D: 자산 배분 -->
+<div class="space-y-3">
+<div class="text-center font-bold text-body-md mb-1">자산 배분</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col items-start w-12">
+<span class="font-headline-md text-clay-lavender">45%</span>
+</div>
+<div class="flex-1 h-2 bg-border-subtle rounded-full overflow-hidden relative">
+<div class="absolute left-0 h-full bg-clay-lavender bar-transition" style="width: 45%;"></div>
+</div>
+<div class="flex flex-col items-end w-12">
+<span class="font-headline-md text-on-surface-variant">55%</span>
+</div>
+</div>
+<div class="flex justify-between text-mono-label text-on-surface-variant opacity-60">
+<div class="flex flex-col">
+<span class="font-bold">F</span>
+<span class="text-[10px]">한놈만 판다</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-bold">D</span>
+<span class="text-[10px]">골고루 담아</span>
+</div>
+</div>
+</div>
+<!-- T vs H: 투자 호흡 -->
+<div class="space-y-3">
+<div class="text-center font-bold text-body-md mb-1">투자 호흡</div>
+<div class="flex items-center justify-between gap-4">
+<div class="flex flex-col items-start w-12">
+<span class="font-headline-md text-on-surface-variant">12%</span>
+</div>
+<div class="flex-1 h-2 bg-border-subtle rounded-full overflow-hidden relative">
+<div class="absolute right-0 h-full bg-clay-peach bar-transition" style="width: 88%;"></div>
+</div>
+<div class="flex flex-col items-end w-12">
+<span class="font-headline-md text-clay-peach">88%</span>
+</div>
+</div>
+<div class="flex justify-between text-mono-label text-on-surface-variant opacity-60">
+<div class="flex flex-col">
+<span class="font-bold">T</span>
+<span class="text-[10px]">빠른 승부</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-bold">H</span>
+<span class="text-[10px]">진득하게</span>
+</div>
+</div>
+</div></div>
+<!-- Buttons Section -->
+<div class="grid grid-cols-2 gap-3 mt-auto">
+<button class="min-h-11 py-3 px-5 rounded-full border border-on-surface font-headline-md text-body-md flex items-center justify-center gap-2 hover:bg-on-surface/5 transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-lg">refresh</span>
+                테스트 다시하기
+            </button>
+<button class="min-h-11 py-3 px-5 rounded-full bg-[#0a0a0a] text-white font-headline-md text-body-md flex items-center justify-center gap-2 hover:bg-[#1f1f1f] transition-colors active:scale-95 duration-200">
+<span class="material-symbols-outlined text-lg">share</span>
+                공유하기
+            </button>
+</div>
+</main>
+<script>
+        // Simple entrance animation for the trait bars
+        document.addEventListener('DOMContentLoaded', () => {
+            const bars = document.querySelectorAll('.bar-transition');
+            bars.forEach(bar => {
+                const targetWidth = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => {
+                    bar.style.width = targetWidth;
+                }, 300);
+            });
+        });
+    </script>
+</body></html>

@@ -1,15 +1,66 @@
 "use client";
 
 import { useState } from "react";
+import { useEffect } from "react";
 
 import Button from "@/components/Button";
 import Choice from "@/components/Choice";
 import ProgressBar from "@/components/ProgressBar";
-import { questions } from "@/data/questions";
+import { fetchQuestions } from "@/lib/api/questions";
 
 export default function TestPage() {
+  const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetchQuestions()
+      .then((data) => {
+        if (cancelled) return;
+
+        setQuestions(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        if (cancelled) return;
+
+        setErrorMessage(error.message);
+        setIsLoading(false);
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  if (isLoading) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-canvas px-6 text-body">
+        질문을 불러오는 중입니다.
+      </main>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-canvas px-6 text-center text-body">
+        {errorMessage}
+      </main>
+    );
+  }
+
+  if (questions.length === 0) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-canvas px-6 text-body">
+        표시할 질문이 없습니다.
+      </main>
+    );
+  }
+
   const question = questions[currentIndex];
   const isFirstQuestion = currentIndex === 0;
   const isLastQuestion = currentIndex === questions.length - 1;
@@ -78,7 +129,11 @@ export default function TestPage() {
               </Button>
             )}
             <Button
-              {...(!isLastQuestion && { onClick: handleNext })}
+              {...(isLastQuestion
+                ? selectedChoiceId
+                  ? { href: "/result.html" }
+                  : {}
+                : { onClick: handleNext })}
               variant="primary"
               type="button"
               disabled={!selectedChoiceId}
