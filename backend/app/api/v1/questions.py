@@ -1,16 +1,36 @@
-from fastapi import APIRouter, HTTPException
-from typing import List
-from app.core.supabase_client import supabase
-from app.schemas.question import QuestionSchema
+from fastapi import APIRouter, HTTPException, status
+from typing import List, Any, Dict
+from app.database import supabase
 
 router = APIRouter()
 
-@router.get("/questions", response_model=List[QuestionSchema], summary="질문 목록 조회")
-def get_questions():
+@router.get("")
+async def get_all_questions():
+    """
+    질문과 선택지 목록을 조회합니다. (원인 파악용 로그 출력 포함)
+    """
     try:
-        # Supabase 'questions' 테이블에서 선택지와 함께 조회 (DB 테이블 구조에 맞게 조인/조회)
-        # DB 담당자가 만든 테이블이 questions, options 인 경우
-        response = supabase.table("questions").select("*, options(*)").order("id").execute()
+        # Supabase 쿼리 실행
+        response = (
+            supabase.table("questions")
+            .select("*, choices(*)")
+            .order("display_order")
+            .execute()
+        )
+        
+        # 터미널에 DB 응답 데이터 출력해보기
+        print("====== [DEBUG] Supabase Response ======")
+        print(response.data)
+        print("=======================================")
+
         return response.data
+
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"질문 데이터 조회 실패: {str(e)}")
+        # 터미널에 에러 출력
+        print("====== [ERROR] Exception Occurred ======")
+        print(type(e), e)
+        print("========================================")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"DB 조회 또는 처리 중 에러 발생: {str(e)}"
+        )
