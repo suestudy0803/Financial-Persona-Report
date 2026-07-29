@@ -74,7 +74,44 @@ npm run build
 
 ### 4. 백엔드 실행
 
-FastAPI 백엔드는 아직 초기 구조만 생성된 상태입니다. `backend/app/main.py`와 Python 의존성 설정이 추가되면 실행 방법을 이 문서에 갱신합니다.
+#### 1. 가상환경 생성 및 활성화
+
+```bash
+cd backend
+python -m venv .venv
+source .venv/bin/activate
+```
+
+#### 2. 의존성 설치
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 3. Supabase 환경 변수 설정
+
+```bash
+cp .env.example .env
+```
+
+`backend/.env`에 Supabase 프로젝트 정보를 입력합니다.
+
+```env
+SUPABASE_URL=https://your-project.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=your-service-role-key
+```
+
+`SUPABASE_SERVICE_ROLE_KEY`는 백엔드 전용 비밀키이므로 프론트엔드, 브라우저, Git에 노출하지 않습니다.
+
+#### 4. FastAPI 실행
+
+```bash
+uvicorn app.main:app --reload
+```
+
+백엔드는 [http://127.0.0.1:8000](http://127.0.0.1:8000)에서 실행되며, API 문서는 [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)에서 확인할 수 있습니다.
+
+프론트엔드와 백엔드를 동시에 실행하려면 터미널을 각각 열어 `frontend`와 `backend`에서 명령을 실행합니다.
 
 ## 📁 프로젝트 구조
 
