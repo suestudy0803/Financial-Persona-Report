@@ -50,12 +50,14 @@
 ### 1. 의존성 설치
 
 ```bash
+cd frontend
 npm install
 ```
 
 ### 2. 개발 서버 실행
 
 ```bash
+cd frontend
 npm run dev
 ```
 
@@ -64,6 +66,7 @@ npm run dev
 ### 3. 정적 빌드
 
 ```bash
+cd frontend
 npm run build
 ```
 

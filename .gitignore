@@ -1,5 +1,26 @@
-node_modules/
-.next/
-out/
+# Frontend dependencies and build output
+**/node_modules/
+**/.next/
+**/out/
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Python backend
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Supabase local state
+backend/supabase/.temp/
+backend/supabase/.branches/
+
+# OS and logs
 .DS_Store
 *.log
