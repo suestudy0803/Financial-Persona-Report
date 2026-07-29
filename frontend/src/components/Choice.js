@@ -8,6 +8,7 @@ export default function Choice({
   value,
   label,
   checked = false,
+  defaultChecked = false,
   onChange,
   disabled = false,
 }) {
@@ -23,7 +24,7 @@ export default function Choice({
         type="radio"
         name={name}
         value={value}
-        checked={checked}
+        {...(onChange ? { checked } : { defaultChecked })}
         onChange={onChange}
         disabled={disabled}
         className="peer sr-only"
