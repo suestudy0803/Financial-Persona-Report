@@ -5,7 +5,7 @@ import Link from "next/link";
 // DESIGN.md components: button-primary / button-secondary / button-on-color / button-text-link
 const VARIANT_CLASSES = {
   primary:
-    "h-11 rounded-full px-5 bg-primary text-on-primary hover:bg-primary-active active:bg-primary-active disabled:bg-primary-disabled disabled:text-muted",
+    "h-11 rounded-full px-5 bg-primary text-on-primary hover:bg-primary-active active:bg-primary-active disabled:!bg-primary-disabled disabled:!text-muted disabled:!border-transparent disabled:opacity-100",
   secondary:
     "h-11 rounded-full px-5 border border-hairline bg-canvas text-ink disabled:text-muted disabled:opacity-60",
   "on-color":
