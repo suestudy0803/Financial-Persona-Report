@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 from fastapi import APIRouter, HTTPException
 
 from app.core.supabase_client import supabase
@@ -5,6 +7,15 @@ from app.schemas.result import ResultResponse, SubmitRequest
 from app.services.scoring import calculate_result
 
 router = APIRouter()
+
+
+def _answers_to_db(answers: Dict[int, str]) -> List[dict]:
+    # DB의 answers 컬럼은 jsonb 배열이어야 한다는 제약(results_answers_array_check)이 있어서 변환
+    return [{"question_id": qid, "option_id": oid} for qid, oid in answers.items()]
+
+
+def _answers_from_db(answers: List[dict]) -> Dict[int, str]:
+    return {item["question_id"]: item["option_id"] for item in answers}
 
 
 @router.post("/submit", response_model=ResultResponse, summary="답변 제출, 점수 계산 및 결과 저장")
@@ -22,7 +33,7 @@ def submit_answers(payload: SubmitRequest):
 
         inserted = (
             supabase.table("results")
-            .insert({"answers": payload.answers, "code": code})
+            .insert({"answers": _answers_to_db(payload.answers), "code": code})
             .execute()
             .data[0]
         )
@@ -45,7 +56,7 @@ def get_result(result_id: str):
         row = supabase.table("results").select("*").eq("id", result_id).single().execute().data
         questions = supabase.table("questions").select("id, axis").execute().data
 
-        answers = {int(k): v for k, v in row["answers"].items()}
+        answers = _answers_from_db(row["answers"])
         scores, percentages, _ = calculate_result(answers, questions)
 
         return {
