@@ -14,10 +14,6 @@ def _answers_to_db(answers: Dict[int, str]) -> List[dict]:
     return [{"question_id": qid, "option_id": oid} for qid, oid in answers.items()]
 
 
-def _answers_from_db(answers: List[dict]) -> Dict[int, str]:
-    return {item["question_id"]: item["option_id"] for item in answers}
-
-
 @router.post("/submit", response_model=ResultResponse, summary="답변 제출, 점수 계산 및 결과 저장")
 def submit_answers(payload: SubmitRequest):
     try:
@@ -48,22 +44,3 @@ def submit_answers(payload: SubmitRequest):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"결과 저장 실패: {str(e)}")
-
-
-@router.get("/results/{result_id}", response_model=ResultResponse, summary="저장된 결과 조회 (공유 링크용)")
-def get_result(result_id: str):
-    try:
-        row = supabase.table("results").select("*").eq("id", result_id).single().execute().data
-        questions = supabase.table("questions").select("id, axis").execute().data
-
-        answers = _answers_from_db(row["answers"])
-        scores, percentages, _ = calculate_result(answers, questions)
-
-        return {
-            "id": row["id"],
-            "code": row["code"],
-            "scores": scores,
-            "percentages": percentages,
-        }
-    except Exception as e:
-        raise HTTPException(status_code=404, detail=f"결과를 찾을 수 없습니다: {str(e)}")

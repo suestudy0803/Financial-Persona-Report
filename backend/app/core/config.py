@@ -9,12 +9,11 @@ ENV_PATH = BASE_DIR / ".env"
 load_dotenv(dotenv_path=ENV_PATH)
 
 class Settings:
-    # .env에 적힌 변수명(NEXT_PUBLIC_...) 그대로 불러오기
-    SUPABASE_URL: str = os.getenv("NEXT_PUBLIC_SUPABASE_URL", "")
-    SUPABASE_KEY: str = os.getenv("NEXT_PUBLIC_SUPABASE_ANON_KEY", "")
+    SUPABASE_URL: str = os.getenv("SUPABASE_URL", "")
+    SUPABASE_KEY: str = os.getenv("SUPABASE_SERVICE_ROLE_KEY", "")
 
     def validate(self):
         if not self.SUPABASE_URL or not self.SUPABASE_KEY:
-            raise ValueError(f"⚠️ .env 파일({ENV_PATH})에 NEXT_PUBLIC_SUPABASE_URL과 NEXT_PUBLIC_SUPABASE_ANON_KEY를 설정해주세요!")
+            raise ValueError(f"⚠️ .env 파일({ENV_PATH})에 SUPABASE_URL과 SUPABASE_SERVICE_ROLE_KEY를 설정해주세요!")
 
 settings = Settings()
