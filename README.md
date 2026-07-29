@@ -63,14 +63,18 @@ npm run dev
 
 브라우저에서 [http://localhost:3000](http://localhost:3000)에 접속합니다.
 
-### 3. 정적 빌드
+### 3. 프로덕션 빌드
 
 ```bash
 cd frontend
 npm run build
 ```
 
-빌드 결과는 `frontend/out/` 디렉터리에 생성됩니다.
+빌드 후 프로덕션 서버를 실행하려면 다음 명령을 사용합니다.
+
+```bash
+npm run start
+```
 
 ### 4. 백엔드 실행
 
