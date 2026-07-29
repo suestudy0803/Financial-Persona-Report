@@ -15,3 +15,15 @@ class SubmitRequest(BaseModel):
 class ResultResponse(BaseModel):
     result_id: str
     code: str
+
+
+class PersonaSchema(BaseModel):
+    name: str
+    image_path: str
+    description: str
+
+
+class ResultResponseSchema(BaseModel):
+    code: str
+    persona: PersonaSchema
+
