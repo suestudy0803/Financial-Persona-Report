@@ -37,11 +37,11 @@
 
 ## 🛠 기술 스택
 
-* **Framework**: Next.js
-* **Language**: JavaScript (ES6+)
-* **Styling**: Tailwind CSS, Stitch UI
-* **Deployment**: Vercel
-*(본 프로젝트는 별도의 백엔드 및 데이터베이스 없이 Client-Side 중심으로 동작합니다.)*
+* **Frontend**: Next.js, JavaScript (ES6+), Tailwind CSS
+* **Backend**: FastAPI, Python
+* **Database**: Supabase PostgreSQL
+* **Repository**: `frontend/`, `backend/`, `docs/` 모노레포
+* **Deployment**: 추후 결정
 
 ---
 
@@ -50,12 +50,14 @@
 ### 1. 의존성 설치
 
 ```bash
+cd frontend
 npm install
 ```
 
 ### 2. 개발 서버 실행
 
 ```bash
+cd frontend
 npm run dev
 ```
 
@@ -64,7 +66,22 @@ npm run dev
 ### 3. 정적 빌드
 
 ```bash
+cd frontend
 npm run build
 ```
 
-빌드 결과는 `out/` 디렉터리에 생성됩니다.
+빌드 결과는 `frontend/out/` 디렉터리에 생성됩니다.
+
+### 4. 백엔드 실행
+
+FastAPI 백엔드는 아직 초기 구조만 생성된 상태입니다. `backend/app/main.py`와 Python 의존성 설정이 추가되면 실행 방법을 이 문서에 갱신합니다.
+
+## 📁 프로젝트 구조
+
+```text
+Financial-Persona-Report/
+├── frontend/          # Next.js 프론트엔드와 DESIGN.md
+├── backend/           # FastAPI 백엔드와 Supabase 설정
+├── docs/              # ARCHITECTURE.md, SPEC.md 등 프로젝트 문서
+└── README.md
+```
