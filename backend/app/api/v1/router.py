@@ -7,4 +7,4 @@ api_router = APIRouter()
 api_router.include_router(questions.router, tags=["Questions"])
 
 # 결과 상세 조회 API 연결
-api_router.include_router(results.router, tags=["Results"])
+api_router.include_router(results.router, tags=["Results"])
