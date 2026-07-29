@@ -9,7 +9,11 @@ import { questions } from "@/data/questions";
 
 export default function TestPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [answers, setAnswers] = useState({});
   const question = questions[currentIndex];
+  const isFirstQuestion = currentIndex === 0;
+  const isLastQuestion = currentIndex === questions.length - 1;
+  const selectedChoiceId = answers[question.id];
 
   function handlePrevious() {
     setCurrentIndex((index) => Math.max(index - 1, 0));
@@ -17,6 +21,13 @@ export default function TestPage() {
 
   function handleNext() {
     setCurrentIndex((index) => Math.min(index + 1, questions.length - 1));
+  }
+
+  function handleChoiceChange(choiceId) {
+    setAnswers((currentAnswers) => ({
+      ...currentAnswers,
+      [question.id]: choiceId,
+    }));
   }
 
   return (
@@ -32,13 +43,14 @@ export default function TestPage() {
           </h1>
 
           <div className="mt-12 space-y-3">
-            {question.options.map((option, index) => (
+            {question.options.map((option) => (
               <Choice
-                defaultChecked={index === 0}
+                checked={selectedChoiceId === option.id}
                 id={option.id}
                 key={option.id}
                 label={option.text}
                 name="mbti-question"
+                onChange={(event) => handleChoiceChange(event.target.value)}
                 value={option.id}
               />
             ))}
@@ -47,23 +59,32 @@ export default function TestPage() {
 
         <div className="bg-gradient-to-t from-canvas via-canvas/95 to-transparent p-4 sm:px-6">
           <div className="flex gap-3">
+            {isFirstQuestion ? (
+              <Button
+                href="/"
+                variant="secondary"
+                className="!h-14 flex-1 !border-2 !border-ink/20 !bg-transparent px-6 active:scale-95"
+              >
+                이전
+              </Button>
+            ) : (
+              <Button
+                onClick={handlePrevious}
+                variant="secondary"
+                type="button"
+                className="!h-14 flex-1 !border-2 !border-ink/20 !bg-transparent px-6 active:scale-95"
+              >
+                이전
+              </Button>
+            )}
             <Button
-              onClick={handlePrevious}
-              variant="secondary"
-              type="button"
-              disabled={currentIndex === 0}
-              className="!h-14 flex-1 !border-2 !border-ink/20 !bg-transparent px-6 active:scale-95"
-            >
-              이전
-            </Button>
-            <Button
-              onClick={handleNext}
+              {...(!isLastQuestion && { onClick: handleNext })}
               variant="primary"
               type="button"
-              disabled={currentIndex === questions.length - 1}
+              disabled={!selectedChoiceId}
               className="!h-14 !flex-[2] !border-2 !border-primary px-6 active:scale-95"
             >
-              다음
+              {isLastQuestion ? "결과 보기" : "다음"}
             </Button>
           </div>
         </div>
