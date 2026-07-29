@@ -12,9 +12,18 @@ export async function fetchQuestions() {
 
   const data = await response.json();
 
-  if (!Array.isArray(data.questions)) {
+  if (!Array.isArray(data)) {
     throw new Error("질문 데이터 형식이 올바르지 않습니다.");
   }
 
-  return data.questions;
+  return data.map(({ id, axis, question_text, display_order, choices = [] }) => ({
+    id,
+    axis,
+    question: question_text,
+    display_order,
+    options: choices.map(({ id: optionId, text }) => ({
+      id: String(optionId),
+      text,
+    })),
+  }));
 }
