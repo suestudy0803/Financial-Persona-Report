@@ -1,3 +1,5 @@
+import Button from "@/components/Button";
+
 export default function HomePage() {
   return (
     <main className="min-h-screen bg-[#fffaf0] px-6 py-12 text-[#0a0a0a] sm:px-10 lg:px-16">
@@ -11,9 +13,9 @@ export default function HomePage() {
         <p className="max-w-xl text-lg leading-8 text-[#3a3a3a]">
           8개의 질문에 답하고 나에게 맞는 금융 MBTI 결과를 확인해보세요.
         </p>
-        <button className="w-fit rounded-full bg-[#0a0a0a] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#1f1f1f]">
+        <Button variant="primary" className="w-fit">
           테스트 시작하기
-        </button>
+        </Button>
       </section>
     </main>
   );

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="light" lang="ko" style="">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css"
+        rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+        :root {
+            --geist-font: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            --brand-ochre: #e8b94a;
+            --clay-bg: #fffaf0;
+            --clay-navy: #0a0a0a;
+        }
+
+        body {
+            font-family: var(--geist-font);
+            background-color: var(--clay-bg);
+            color: var(--clay-navy);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .answer-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .answer-card:active {
+            transform: scale(0.98);
+        }
+
+        .answer-radio:checked+.answer-card {
+            border-color: var(--clay-navy);
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(10, 10, 10, 0.05);
+        }
+
+        /* Clay Style Rounded Display for Headlines */
+        .headline-rounded {
+            letter-spacing: -0.02em;
+            word-break: keep-all;
+        }
+    </style>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#0a0a0a",
+                        "background": "#fffaf0",
+                        "on-surface": "#0a0a0a",
+                        "border-subtle": "#e5e5e5",
+                        "brand-ochre": "#e8b94a",
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "1rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "margin-desktop": "32px",
+                        "margin-mobile": "16px",
+                        "gutter": "16px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Pretendard"],
+                        "body-md": ["Pretendard"],
+                        "headline-lg": ["Pretendard"],
+                        "headline-xl": ["Pretendard"],
+                        "headline-md": ["Pretendard"],
+                        "body-sm": ["Pretendard"],
+                        "mono-label": ["JetBrains Mono"],
+                        "code-block": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+    <link data-snapdom="injected-import"
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+</head>
+
+<body class="flex flex-col min-h-screen bg-background">
+    <div class="flex flex-col w-full max-w-[600px] mx-auto h-full max-h-[900px] bg-background overflow-hidden relative">
+        <!-- Progress Section -->
+        <div class="px-margin-mobile pt-10 pb-4">
+            <div class="max-w-[600px] mx-auto flex items-center gap-4">
+                <div class="flex-1 h-1.5 bg-[#e5e1d8] rounded-full overflow-hidden">
+                    <div class="h-full bg-brand-ochre w-[12.5%] transition-all duration-500"></div>
+                </div>
+                <span class="font-mono-label text-xs font-medium text-on-surface opacity-60">1/8</span>
+            </div>
+        </div>
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col px-margin-mobile pt-12 pb-24 max-w-[600px] mx-auto w-full overflow-y-auto">
+            <!-- Question Title -->
+            <h1 class="headline-rounded text-2xl md:text-3xl text-on-surface font-bold leading-tight mb-12">
+                여행을 가서 일주일 동안<br>
+                증권 앱을 못 보게 된다면?
+            </h1>
+            <!-- Answer List -->
+            <form class="space-y-3">
+                <!-- Option 1 -->
+                <label class="block cursor-pointer group">
+                    <input checked="" class="hidden answer-radio" name="mbti_q" type="radio">
+                    <div class="answer-card min-h-[80px] flex items-center p-5 bg-white/50 border border-border-subtle rounded-xl group-hover:border-on-surface/40"
+                        style="border-color: rgb(10, 10, 10); background-color: rgb(255, 255, 255); box-shadow: rgba(10, 10, 10, 0.05) 0px 4px 12px;">
+                        <p class="font-body-md text-on-surface leading-snug">
+                            그렇게 오래 자리를 비울 수 없다. 포지션을 정리하거나 자동 주문을 걸어둔다.
+                        </p>
+                    </div>
+                </label>
+                <!-- Option 2 -->
+                <label class="block cursor-pointer group">
+                    <input class="hidden answer-radio" name="mbti_q" type="radio">
+                    <div
+                        class="answer-card min-h-[80px] flex items-center p-5 bg-white/50 border border-border-subtle rounded-xl group-hover:border-on-surface/40">
+                        <p class="font-body-md text-on-surface leading-snug">
+                            하루에도 여러 번 확인해야 마음이 놓인다. 중요한 가격에는 손·익절 주문을 설정한다.
+                        </p>
+                    </div>
+                </label>
+                <!-- Option 3 -->
+                <label class="block cursor-pointer group">
+                    <input class="hidden answer-radio" name="mbti_q" type="radio">
+                    <div
+                        class="answer-card min-h-[80px] flex items-center p-5 bg-white/50 border border-border-subtle rounded-xl group-hover:border-on-surface/40">
+                        <p class="font-body-md text-on-surface leading-snug">
+                            며칠에서 몇 주 정도는 안 봐도 괜찮다. 주말에 한 번씩 확인한다.
+                        </p>
+                    </div>
+                </label>
+                <!-- Option 4 -->
+                <label class="block cursor-pointer group">
+                    <input class="hidden answer-radio" name="mbti_q" type="radio">
+                    <div
+                        class="answer-card min-h-[80px] flex items-center p-5 bg-white/50 border border-border-subtle rounded-xl group-hover:border-on-surface/40">
+                        <p class="font-body-md text-on-surface leading-snug">
+                            한 달 동안 안 봐도 상관없다. 투자 앱보다 기업의 몇 년 뒤를 본다.
+                        </p>
+                    </div>
+                </label>
+            </form>
+        </main>
+        <!-- Bottom Navigation -->
+        <div class="p-margin-mobile bg-gradient-to-t from-background via-background/95 to-transparent">
+            <div class="max-w-[600px] mx-auto flex gap-3">
+                <button
+                    class="flex-1 py-4 px-6 bg-transparent border-2 border-on-surface/20 text-on-surface font-semibold rounded-full active:scale-95 transition-transform">이전</button>
+                <button
+                    class="flex-[2] py-4 px-6 bg-[#0a0a0a] border-2 border-[#0a0a0a] text-white font-semibold rounded-full flex items-center justify-center gap-2 active:scale-95 transition-transform"><span
+                        class="">다음</span></button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+</body>
+
+</html>
