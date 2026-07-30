@@ -51,9 +51,9 @@ def get_result(result_id: UUID):
             "result_id": result_data["id"],
             "code": result_data["code"],
             "persona": {
-                "name": persona_data.get("name", ""),
-                "image_path": persona_data.get("image_path", ""),
-                "description": persona_data.get("description", ""),
+                "name": persona_data.get("name") or "",
+                "image_path": persona_data.get("image_path") or "",
+                "description": persona_data.get("description") or "",
             },
             "traits": percentages,
         }
