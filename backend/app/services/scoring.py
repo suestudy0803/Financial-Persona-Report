@@ -7,12 +7,21 @@ CHOICE_MAGNITUDES = {1: 2, 2: 1, 3: 1, 4: 2}
 FIRST_POLE_CHOICES = {1, 2}
 
 # 축 코드 -> (첫 성향 글자, 둘째 성향 글자)
-# SPEC.md 기준: "AP" 축은 이름과 달리 P가 첫 성향쪽, A가 둘째 성향쪽이다.
+# DB 기준: AP 축의 선택지 1,2번은 A 타입, 3,4번은 P 타입이므로 A가 첫 성향, P가 둘째 성향이다.
 AXIS_POLES = {
-    "AP": ("P", "A"),
+    "AP": ("A", "P"),
     "NS": ("N", "S"),
     "FD": ("F", "D"),
     "TH": ("T", "H"),
+}
+
+# 동점일 때 결과 코드에 사용할 기본 성향 (SPEC.md §3 기본 성향 테이블 기준)
+# 모든 점수가 동점이면 결과 코드는 PNDH
+DEFAULT_POLES = {
+    "AP": "P",
+    "NS": "N",
+    "FD": "D",
+    "TH": "H",
 }
 
 
@@ -43,8 +52,13 @@ def calculate_result(
         second_score = pole_scores[axis]["second"]
         scores[axis] = {neg_letter: first_score, pos_letter: second_score}
 
-        # 동점(첫 성향 점수 == 둘째 성향 점수)이면 기본 성향(첫 성향)을 따른다.
-        letter = pos_letter if second_score > first_score else neg_letter
+        # 동점이면 DEFAULT_POLES의 기본 성향을 따른다 (SPEC.md §3).
+        if second_score > first_score:
+            letter = pos_letter
+        elif first_score > second_score:
+            letter = neg_letter
+        else:
+            letter = DEFAULT_POLES[axis]
         code += letter
 
         # SPEC.md 퍼센티지 공식은 부호 있는 축 점수(-4~+4) 기준이므로 여기서 다시 계산
