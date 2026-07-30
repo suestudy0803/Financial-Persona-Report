@@ -107,17 +107,17 @@ export default function TestPage() {
   }
 
   return (
-    <main className="flex min-h-dvh flex-col bg-canvas text-ink">
-      <div className="mx-auto flex min-h-dvh max-h-[900px] w-full max-w-[600px] flex-col overflow-hidden">
-        <div className="px-4 pb-4 pt-10 sm:px-6">
+    <main className="flex h-dvh min-h-[667px] flex-col overflow-hidden bg-canvas text-ink">
+      <div className="mx-auto flex h-full w-full max-w-[600px] flex-col overflow-hidden">
+        <div className="shrink-0 px-4 pb-3 pt-6 sm:px-6">
           <ProgressBar current={currentIndex + 1} total={questions.length} />
         </div>
 
-        <section className="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-28 pt-12 sm:px-6">
+        <section className="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-4 pt-6 sm:px-6">
           <h1 className="text-2xl font-bold leading-tight tracking-[-0.02em] md:text-3xl">
             {question.question}
           </h1>
-          <div className="mt-12 space-y-3">
+          <div className="mt-6 space-y-3">
             {question.choices.map((option) => (
               <Choice
                 checked={selectedChoiceId === option.id}
