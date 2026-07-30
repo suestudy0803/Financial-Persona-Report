@@ -16,7 +16,7 @@
 }
 
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Pretendard, Arial, Helvetica, sans-serif;
   color: #0a0a0a;
   background: #fffaf0;
 }
@@ -27,6 +27,25 @@
 
 body {
   margin: 0;
+}
+
+@keyframes trait-bar-fill {
+  from {
+    width: 0;
+  }
+  to {
+    width: var(--trait-bar-width);
+  }
+}
+
+.trait-bar-fill {
+  animation: trait-bar-fill 700ms ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trait-bar-fill {
+    animation: none;
+  }
 }
 
 button {

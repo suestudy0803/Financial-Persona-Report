@@ -114,10 +114,9 @@ export default function TestPage() {
         </div>
 
         <section className="w-full flex-1 overflow-y-auto px-4 pb-28 pt-12 sm:px-6">
-          <h1 className="text-2xl font-bold leading-tight tracking-[-0.02em] sm:text-3xl">
+          <h1 className="text-2xl font-bold leading-tight tracking-[-0.02em] md:text-3xl">
             {question.question}
           </h1>
-
           <div className="mt-12 space-y-3">
             {question.choices.map((option) => (
               <Choice
