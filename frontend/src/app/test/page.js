@@ -107,13 +107,13 @@ export default function TestPage() {
   }
 
   return (
-    <main className="flex min-h-screen flex-col bg-canvas text-ink">
-      <div className="mx-auto flex h-screen min-h-[640px] max-h-[900px] w-full max-w-[600px] flex-col overflow-hidden">
+    <main className="flex min-h-dvh flex-col bg-canvas text-ink">
+      <div className="mx-auto flex min-h-dvh max-h-[900px] w-full max-w-[600px] flex-col overflow-hidden">
         <div className="px-4 pb-4 pt-10 sm:px-6">
           <ProgressBar current={currentIndex + 1} total={questions.length} />
         </div>
 
-        <section className="w-full flex-1 overflow-y-auto px-4 pb-28 pt-12 sm:px-6">
+        <section className="min-h-0 w-full flex-1 overflow-y-auto px-4 pb-28 pt-12 sm:px-6">
           <h1 className="text-2xl font-bold leading-tight tracking-[-0.02em] md:text-3xl">
             {question.question}
           </h1>
@@ -132,7 +132,7 @@ export default function TestPage() {
           </div>
         </section>
 
-        <div className="bg-gradient-to-t from-canvas via-canvas/95 to-transparent p-4 sm:px-6">
+        <div className="shrink-0 bg-gradient-to-t from-canvas via-canvas/95 to-transparent p-4 sm:px-6">
           <div className="flex gap-3">
             {isFirstQuestion ? (
               <Button
