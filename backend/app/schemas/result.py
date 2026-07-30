@@ -1,4 +1,4 @@
-from typing import List
+from typing import Dict, List
 
 from pydantic import BaseModel
 
@@ -24,6 +24,7 @@ class PersonaSchema(BaseModel):
 
 
 class ResultResponseSchema(BaseModel):
+    result_id: str
     code: str
     persona: PersonaSchema
-
+    traits: Dict[str, Dict[str, float]]

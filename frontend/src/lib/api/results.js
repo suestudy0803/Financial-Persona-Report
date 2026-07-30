@@ -23,9 +23,9 @@ export async function submitResults(answers) {
   return data;
 }
 
-export async function fetchResult(code) {
+export async function fetchResult(resultId) {
   const response = await fetch(
-    `${API_BASE_URL}/api/v1/results/${encodeURIComponent(code)}`,
+    `${API_BASE_URL}/api/v1/results/${encodeURIComponent(resultId)}`,
     { cache: "no-store" },
   );
 
@@ -35,7 +35,7 @@ export async function fetchResult(code) {
 
   const data = await response.json();
 
-  if (!data.code || !data.persona) {
+  if (!data.result_id || !data.code || !data.persona || !data.traits) {
     throw new Error("결과 응답 형식이 올바르지 않습니다.");
   }
 
