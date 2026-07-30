@@ -16,16 +16,16 @@ export async function submitResults(answers) {
 
   const data = await response.json();
 
-  if (!data.result_id) {
+  if (!data.result_id || !data.code) {
     throw new Error("결과 응답 형식이 올바르지 않습니다.");
   }
 
   return data;
 }
 
-export async function fetchResult(resultId) {
+export async function fetchResult(code) {
   const response = await fetch(
-    `${API_BASE_URL}/api/v1/results/${encodeURIComponent(resultId)}`,
+    `${API_BASE_URL}/api/v1/results/${encodeURIComponent(code)}`,
     { cache: "no-store" },
   );
 
@@ -35,7 +35,7 @@ export async function fetchResult(resultId) {
 
   const data = await response.json();
 
-  if (!data.result_id || !data.persona) {
+  if (!data.code || !data.persona) {
     throw new Error("결과 응답 형식이 올바르지 않습니다.");
   }
 

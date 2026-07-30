@@ -4,10 +4,23 @@ import PersonaHeader from "@/components/PersonaHeader";
 import ResultActions from "@/components/ResultActions";
 import TraitBar from "@/components/TraitBar";
 import { results } from "@/data/results";
+import { fetchResult } from "@/lib/api/results";
 
 export default async function ResultPage({ params }) {
   const { type } = await params;
-  const result = results.find(({ code }) => code === type.toUpperCase());
+  let result;
+
+  try {
+    const apiResult = await fetchResult(type);
+    const mockResult = results.find(({ code }) => code === apiResult.code);
+
+    result = {
+      ...apiResult,
+      traits: mockResult?.traits ?? [],
+    };
+  } catch {
+    result = null;
+  }
 
   if (!result) {
     notFound();

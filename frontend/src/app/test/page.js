@@ -7,13 +7,18 @@ import Button from "@/components/Button";
 import Choice from "@/components/Choice";
 import ProgressBar from "@/components/ProgressBar";
 import { fetchQuestions } from "@/lib/api/questions";
+import { submitResults } from "@/lib/api/results";
+import { useRouter } from "next/navigation";
 
 export default function TestPage() {
+  const router = useRouter();
   const [questions, setQuestions] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [answers, setAnswers] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -74,6 +79,25 @@ export default function TestPage() {
     setCurrentIndex((index) => Math.min(index + 1, questions.length - 1));
   }
 
+  async function handleSubmit() {
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const result = await submitResults(
+        Object.entries(answers).map(([questionId, choiceId]) => ({
+          question_id: Number(questionId),
+          choice_id: choiceId,
+        })),
+      );
+
+      router.push(`/result/${result.code}`);
+    } catch (error) {
+      setSubmitError(error.message);
+      setIsSubmitting(false);
+    }
+  }
+
   function handleChoiceChange(choiceId) {
     setAnswers((currentAnswers) => ({
       ...currentAnswers,
@@ -129,19 +153,18 @@ export default function TestPage() {
               </Button>
             )}
             <Button
-              {...(isLastQuestion
-                ? selectedChoiceId
-                  ? { href: "/result.html" }
-                  : {}
-                : { onClick: handleNext })}
+              onClick={isLastQuestion ? handleSubmit : handleNext}
               variant="primary"
               type="button"
-              disabled={!selectedChoiceId}
+              disabled={!selectedChoiceId || isSubmitting}
               className="!h-14 !flex-[2] !border-2 !border-primary px-6 active:scale-95"
             >
-              {isLastQuestion ? "결과 보기" : "다음"}
+              {isSubmitting ? "결과를 불러오는 중" : isLastQuestion ? "결과 보기" : "다음"}
             </Button>
           </div>
+          {submitError && (
+            <p className="mt-3 text-center text-sm text-clay-pink">{submitError}</p>
+          )}
         </div>
       </div>
     </main>
