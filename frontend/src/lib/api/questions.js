@@ -16,14 +16,5 @@ export async function fetchQuestions() {
     throw new Error("질문 데이터 형식이 올바르지 않습니다.");
   }
 
-  return data.map(({ id, axis, question_text, display_order, choices = [] }) => ({
-    id,
-    axis,
-    question: question_text,
-    display_order,
-    options: choices.map(({ id: optionId, text }) => ({
-      id: String(optionId),
-      text,
-    })),
-  }));
+  return data;
 }
