@@ -1,7 +1,7 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "InVesting MBTI",
+  title: "Investing MBTI",
   description: "나만의 금융 투자 성향을 알아보세요.",
 };
 
