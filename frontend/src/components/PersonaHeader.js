@@ -9,7 +9,7 @@ export default function PersonaHeader({ code, persona }) {
         <h2 className="text-2xl font-semibold">{persona.name}</h2>
       </header>
 
-      <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-[24px] bg-[#b8a4ed] p-8">
+      <div className="flex aspect-square w-full items-center justify-center overflow-hidden border-0 bg-transparent p-8">
         <span className="text-lg font-semibold text-muted">No Image</span>
       </div>
 
