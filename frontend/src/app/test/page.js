@@ -91,7 +91,7 @@ export default function TestPage() {
         })),
       );
 
-      router.push(`/result/${result.code}`);
+      router.push(`/result/${result.result_id}`);
     } catch (error) {
       setSubmitError(error.message);
       setIsSubmitting(false);

@@ -88,7 +88,7 @@ Supabase PostgreSQL
 5. FastAPI가 네 축의 점수와 결과 유형을 계산한다.
 6. 필요한 경우 제출 기록과 결과를 Supabase에 저장한다.
 7. FastAPI가 결과 코드와 결과 상세를 반환한다.
-8. Next.js가 결과 화면을 표시한다.
+8. Next.js가 `result_id`로 결과를 조회하고 결과 화면을 표시한다.
 
 ## 5. API 책임
 
@@ -97,8 +97,8 @@ Supabase PostgreSQL
 | 엔드포인트 예시 | 책임 |
 |---|---|
 | `GET /api/v1/questions` | 활성 질문·선택지 조회 |
-| `POST /api/v1/assessments` | 답변 검증, 점수 계산, 결과 생성 |
-| `GET /api/v1/results/{code}` | 결과 코드에 해당하는 결과 조회 |
+| `POST /api/v1/results` | 답변 검증, 점수 계산, 결과 생성 |
+| `GET /api/v1/results/{result_id}` | 저장된 답변으로 결과와 성향 비율 재계산 |
 | `GET /health` | 백엔드 상태 확인 |
 
 FastAPI 라우터는 요청을 받고 서비스로 전달하는 역할만 한다. 계산과 데이터 접근을 라우터에 직접 작성하지 않는다.

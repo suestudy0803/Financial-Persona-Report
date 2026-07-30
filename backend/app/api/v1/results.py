@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
+from uuid import UUID
 from app.core.supabase_client import supabase
 
 from app.schemas.result import AnswerItem, ResultResponse, SubmitRequest, PersonaSchema, ResultResponseSchema
@@ -9,40 +10,58 @@ router = APIRouter()
 
 
 @router.get(
-    "/results/{code}",
+    "/results/{result_id}",
     response_model=ResultResponseSchema,
     summary="결과 상세 조회",
 )
-def get_result(code: str):
-    if not code:
-        raise HTTPException(status_code=400, detail="code가 필요합니다.")
-
+def get_result(result_id: UUID):
     try:
-        # personas 테이블에 직접 code로 접근
-        response = (
-            supabase.table("personas")
-            .select("name, image_path, description")
-            .eq("code", code)
+        result_response = (
+            supabase.table("results")
+            .select("id, code, answers")
+            .eq("id", str(result_id))
             .single()
             .execute()
         )
+        result_data = result_response.data
 
-        persona_data = response.data
+        if not result_data:
+            raise HTTPException(status_code=404, detail="결과를 찾을 수 없습니다.")
+
+        questions = supabase.table("questions").select("id, axis").execute().data
+        answers = result_data.get("answers", [])
+        answers_by_question_id = {
+            answer["question_id"]: answer["option_id"] for answer in answers
+        }
+        _, percentages, _ = calculate_result(answers_by_question_id, questions)
+
+        persona_response = (
+            supabase.table("personas")
+            .select("name, image_path, description")
+            .eq("code", result_data["code"])
+            .single()
+            .execute()
+        )
+        persona_data = persona_response.data
 
         if not persona_data:
             raise HTTPException(status_code=404, detail="결과를 찾을 수 없습니다.")
 
         return {
-            "code": code,
+            "result_id": result_data["id"],
+            "code": result_data["code"],
             "persona": {
                 "name": persona_data.get("name", ""),
                 "image_path": persona_data.get("image_path", ""),
                 "description": persona_data.get("description", ""),
             },
+            "traits": percentages,
         }
 
+    except HTTPException:
+        raise
     except Exception as e:
-        print(f"GET /api/v1/results/{code} Error:", str(e))
+        print(f"GET /api/v1/results/{result_id} Error:", str(e))
         raise HTTPException(status_code=500, detail="서버 에러가 발생했습니다.")
 
 
