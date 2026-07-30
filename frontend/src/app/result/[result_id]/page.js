@@ -5,30 +5,35 @@ import ResultActions from "@/components/ResultActions";
 import TraitBar from "@/components/TraitBar";
 import { fetchResult } from "@/lib/api/results";
 
+// defaultSide: 동점일 때 하이라이트할 방향 (기본 성향 PNDH 기준)
 const TRAIT_CONFIG = {
   AP: {
     title: "활동 방식",
-    left: { label: "A", description: "직접투자" },
-    right: { label: "P", description: "간접투자" },
+    left: { label: "P", description: "간접투자" },
+    right: { label: "A", description: "직접투자" },
     color: "pink",
+    defaultSide: "left",  // P가 기본
   },
   NS: {
     title: "정보 분석",
     left: { label: "N", description: "숫자 중심" },
     right: { label: "S", description: "감각 중심" },
     color: "mint",
+    defaultSide: "left",  // N이 기본
   },
   FD: {
     title: "자산 배분",
     left: { label: "F", description: "한놈만 판다" },
     right: { label: "D", description: "골고루 담아" },
     color: "lavender",
+    defaultSide: "right",  // D가 기본
   },
   TH: {
     title: "투자 호흡",
     left: { label: "T", description: "빠른 승부" },
     right: { label: "H", description: "진득하게" },
     color: "peach",
+    defaultSide: "right",  // H가 기본
   },
 };
 
@@ -38,11 +43,19 @@ function createTraits(percentages) {
     const leftPercentage = axisPercentages[config.left.label] ?? 0;
     const rightPercentage = axisPercentages[config.right.label] ?? 0;
 
+    // 동점이면 TRAIT_CONFIG의 defaultSide(기본 성향)를 따른다
+    const fillSide =
+      leftPercentage > rightPercentage
+        ? "left"
+        : rightPercentage > leftPercentage
+          ? "right"
+          : config.defaultSide;
+
     return {
       ...config,
       left: { ...config.left, percentage: leftPercentage },
       right: { ...config.right, percentage: rightPercentage },
-      fillSide: leftPercentage >= rightPercentage ? "left" : "right",
+      fillSide,
     };
   });
 }
