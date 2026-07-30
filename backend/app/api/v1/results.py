@@ -55,7 +55,7 @@ def _answers_to_db(answers: List[AnswerItem]) -> List[dict]:
 
 
 @router.post(
-    "/submit",
+    "/results",
     response_model=ResultResponse,
     summary="답변 제출, 점수 계산 및 결과 저장",
 )
