@@ -1,6 +1,6 @@
 # Architecture
 
-금융 MBTI 서비스는 `frontend/`와 `backend/`를 하나의 모노레포에서 관리한다. 프론트엔드는 Next.js, 백엔드는 FastAPI, 데이터베이스는 Supabase PostgreSQL을 사용한다. 브라우저가 Supabase에 직접 접근하지 않고 FastAPI를 통해서만 데이터에 접근한다.
+투자 MBTI 서비스는 `frontend/`와 `backend/`를 하나의 모노레포에서 관리한다. 프론트엔드는 Next.js, 백엔드는 FastAPI, 데이터베이스는 Supabase PostgreSQL을 사용한다. 브라우저가 Supabase에 직접 접근하지 않고 FastAPI를 통해서만 데이터에 접근한다.
 
 ## 1. 기술 스택
 

@@ -10,7 +10,7 @@ export default function NotFound() {
         페이지를 찾을 수 없어요
       </h1>
       <p className="mt-4 max-w-sm text-[16px] leading-[1.55] text-body">
-        주소가 정확한지 확인하거나, 처음으로 돌아가 금융 MBTI 테스트를 다시 시작해보세요.
+        주소가 정확한지 확인하거나, 처음으로 돌아가 투자 MBTI 테스트를 다시 시작해보세요.
       </p>
       <Button href="/" variant="primary" className="mt-8">
         홈으로 돌아가기

@@ -20,36 +20,42 @@ const COLOR_CLASSES = {
 export default function TraitBar({ title, left, right, color, fillSide }) {
   const colorClass = COLOR_CLASSES[color] ?? COLOR_CLASSES.pink;
   const fill = fillSide === "right" ? right : left;
+  const fillPercentage = Math.min(fill.percentage, 99);
 
   return (
     <section className="space-y-3">
       <h3 className="text-center text-base font-bold">{title}</h3>
-      <div className="flex items-center justify-between gap-4">
-        <span className={`w-12 text-left text-2xl font-semibold ${fillSide === "left" ? colorClass.value : "text-muted"}`}>
-          {left.percentage}%
-        </span>
+      <div className="flex items-center gap-3">
+        <div className="w-16 shrink-0 text-left">
+          <strong
+            className={`block text-xl font-bold ${fillSide === "left" ? colorClass.value : "text-ink"}`}
+          >
+            {left.label}
+          </strong>
+          <span className={`text-xs ${fillSide === "left" ? colorClass.value : "text-muted"}`}>
+            {left.description}
+          </span>
+        </div>
         <div className="relative h-2 flex-1 overflow-hidden rounded-full bg-hairline">
           <div
-            className={`absolute h-full ${colorClass.bar}`}
+            className={`trait-bar-fill absolute h-full ${colorClass.bar}`}
             style={{
-              width: `${fill.percentage}%`,
+              "--trait-bar-width": `${fillPercentage}%`,
+              width: "var(--trait-bar-width)",
               [fillSide]: 0,
             }}
           />
         </div>
-        <span className={`w-12 text-right text-2xl font-semibold ${fillSide === "right" ? colorClass.value : "text-muted"}`}>
-          {right.percentage}%
-        </span>
-      </div>
-      <div className="flex justify-between font-mono text-xs text-muted">
-        <span>
-          <strong className="block text-ink">{left.label}</strong>
-          {left.description}
-        </span>
-        <span className="text-right">
-          <strong className="block text-ink">{right.label}</strong>
-          {right.description}
-        </span>
+        <div className="w-16 shrink-0 text-right">
+          <strong
+            className={`block text-xl font-bold ${fillSide === "right" ? colorClass.value : "text-ink"}`}
+          >
+            {right.label}
+          </strong>
+          <span className={`text-xs ${fillSide === "right" ? colorClass.value : "text-muted"}`}>
+            {right.description}
+          </span>
+        </div>
       </div>
     </section>
   );
