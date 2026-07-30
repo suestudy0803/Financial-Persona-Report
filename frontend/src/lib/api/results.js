@@ -16,7 +16,7 @@ export async function submitResults(answers) {
 
   const data = await response.json();
 
-  if (!data.result_id) {
+  if (!data.result_id || !data.code) {
     throw new Error("결과 응답 형식이 올바르지 않습니다.");
   }
 
@@ -35,7 +35,7 @@ export async function fetchResult(resultId) {
 
   const data = await response.json();
 
-  if (!data.result_id || !data.persona) {
+  if (!data.result_id || !data.code || !data.persona || !data.traits) {
     throw new Error("결과 응답 형식이 올바르지 않습니다.");
   }
 

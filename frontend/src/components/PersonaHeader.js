@@ -9,12 +9,8 @@ export default function PersonaHeader({ code, persona }) {
         <h2 className="text-2xl font-semibold">{persona.name}</h2>
       </header>
 
-      <div className="flex aspect-square w-full items-center justify-center overflow-hidden rounded-[24px] bg-[#b8a4ed] p-8">
-        <img
-          alt={`${persona.name} 이미지`}
-          className="h-full w-full object-contain"
-          src={persona.image_path}
-        />
+      <div className="flex aspect-square w-full items-center justify-center overflow-hidden border-0 bg-transparent p-8">
+        <span className="text-lg font-semibold text-muted">No Image</span>
       </div>
 
       <section className="rounded-2xl border border-hairline bg-surface-card p-6">

@@ -65,8 +65,8 @@
 | 기능 | 메서드 | 경로 |
 |---|---|---|
 | 질문 조회 | GET | `/api/v1/questions` |
-| 테스트 제출 및 결과 계산 | POST | `/api/v1/assessments` |
-| 결과 조회 | GET | `/api/v1/results/{code}` |
+| 테스트 제출 및 결과 계산 | POST | `/api/v1/results` |
+| 결과 조회 | GET | `/api/v1/results/{result_id}` |
 | 서버 상태 확인 | GET | `/health` |
 
 실제 요청·응답 필드와 인증 여부는 구현 전에 확정한다. FastAPI가 OpenAPI 문서를 제공하며, 프론트엔드는 정의된 API 계약만 사용한다.
@@ -103,14 +103,19 @@
 
 ```json
 {
+  "result_id": "550e8400-e29b-41d4-a716-446655440000",
   "code": "PNDH",
-  "name": "결과 유형명",
-  "summary": "결과 설명",
-  "percentages": {
-    "P": 62.5,
-    "A": 37.5
+  "persona": {
+    "name": "결과 유형명",
+    "image_path": "/images/personas/pndh.png",
+    "description": "결과 설명"
   },
-  "image_url": "/images/results/pndh.webp"
+  "traits": {
+    "AP": {
+      "P": 62.5,
+      "A": 37.5
+    }
+  }
 }
 ```
 
